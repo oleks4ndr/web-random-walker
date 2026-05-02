@@ -1,1 +1,13 @@
-# App settings: max pages, max depth, data directory, timeout defaults
+from pathlib import Path
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATA_DIR = PROJECT_ROOT / "data"
+SCANS_DIR = DATA_DIR / "scans"
+
+DEFAULT_MAX_PAGES = 50
+DEFAULT_MAX_DEPTH = 3
+DEFAULT_REQUEST_TIMEOUT_SECONDS = 10
+
+DEFAULT_RANDOM_WALK_COUNT = 1000
+DEFAULT_RANDOM_WALK_STEPS = 30
