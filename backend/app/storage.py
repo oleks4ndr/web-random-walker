@@ -1,0 +1,1 @@
+# Saves and loads crawl results from data/scans/.

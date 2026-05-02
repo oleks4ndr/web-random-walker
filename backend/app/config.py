@@ -1,0 +1,1 @@
+# App settings: max pages, max depth, data directory, timeout defaults

@@ -1,0 +1,1 @@
+# Normalizes URLs, removes fragments, filters external links, handles trailing slashes.

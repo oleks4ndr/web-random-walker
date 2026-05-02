@@ -1,2 +1,1 @@
-# Random Walker Website Navigation Analyzer
-
+# Website Random Walker
