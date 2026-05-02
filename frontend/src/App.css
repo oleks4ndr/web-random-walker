@@ -1,0 +1,238 @@
+.start-page,
+.graph-placeholder-page {
+	position: relative;
+	min-height: 100vh;
+	background: var(--color-background);
+	overflow: hidden;
+}
+
+.menu-button {
+	position: fixed;
+	top: 22px;
+	left: 24px;
+	width: 58px;
+	height: 58px;
+	display: grid;
+	align-content: center;
+	gap: 8px;
+	padding: 13px 12px;
+	background: var(--color-main);
+	box-shadow: var(--shadow-offset) 0 var(--color-accent-1);
+}
+
+.menu-button span {
+	display: block;
+	width: 34px;
+	height: 4px;
+	background: var(--color-text-dark);
+	opacity: 0.62;
+}
+
+.wordmark {
+	position: fixed;
+	top: 25px;
+	left: 50%;
+	transform: translateX(-50%);
+	color: var(--color-main);
+	font-size: 2rem;
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: 0;
+}
+
+.start-panel {
+	width: min(940px, calc(100vw - 48px));
+	margin: 0 auto;
+	padding-top: 44vh;
+}
+
+h1 {
+	margin: 0 0 8px;
+	color: var(--color-text);
+	font-size: clamp(2rem, 4vw, 2.75rem);
+	font-weight: 500;
+	line-height: 1.15;
+	text-shadow: 4px 4px 0 rgba(238, 242, 242, 0.28);
+	letter-spacing: 0;
+}
+
+.crawl-form {
+	display: grid;
+	gap: var(--space-3);
+}
+
+.url-label {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+}
+
+.url-row {
+	display: grid;
+	grid-template-columns: 1fr var(--input-height);
+	height: var(--input-height);
+	background: var(--color-main);
+	box-shadow: var(--shadow-offset) 0 var(--color-shadow);
+}
+
+.url-row input {
+	width: 100%;
+	min-width: 0;
+	border: 0;
+	outline: 0;
+	padding: 0 22px;
+	color: var(--color-text-dark);
+	background: transparent;
+	font-size: 1.1rem;
+}
+
+.url-row input::placeholder {
+	color: rgba(16, 33, 35, 0.45);
+	opacity: 1;
+}
+
+.submit-button {
+	width: 38px;
+	height: 38px;
+	align-self: center;
+	justify-self: center;
+	background: rgba(238, 242, 242, 0.34);
+}
+
+.submit-button:hover,
+.submit-button:focus-visible {
+	background: var(--color-accent-1);
+	outline: 0;
+}
+
+.advanced-toggle {
+	width: fit-content;
+	min-height: 56px;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 0 18px;
+	color: var(--color-text-dark);
+	background: var(--color-main);
+	box-shadow: var(--shadow-offset) 0 var(--color-accent-1);
+	font-size: 1.2rem;
+}
+
+.advanced-toggle:hover,
+.advanced-toggle:focus-visible {
+	background: #bac9cb;
+	outline: 0;
+}
+
+.advanced-settings {
+	width: min(460px, 100%);
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: var(--space-2);
+	margin-top: calc(-1 * var(--space-1));
+}
+
+.advanced-settings label {
+	display: grid;
+	gap: 8px;
+	color: var(--color-main);
+	font-size: 0.95rem;
+}
+
+.advanced-settings input {
+	width: 100%;
+	height: 46px;
+	border: 0;
+	outline: 0;
+	padding: 0 12px;
+	color: var(--color-text-dark);
+	background: var(--color-main);
+	box-shadow: 6px 6px 0 var(--color-accent-1);
+}
+
+.status-text,
+.error-text {
+	margin: 0;
+	font-size: 0.95rem;
+}
+
+.status-text {
+	color: var(--color-main);
+}
+
+.error-text {
+	max-width: 720px;
+	color: var(--color-error);
+}
+
+.footer-credit {
+	position: fixed;
+	left: 24px;
+	bottom: 18px;
+	color: rgba(168, 187, 190, 0.22);
+	font-size: 1.1rem;
+}
+
+.graph-placeholder {
+	width: min(920px, calc(100vw - 48px));
+	margin: 0 auto;
+	padding-top: 20vh;
+}
+
+.graph-placeholder p {
+	color: var(--color-main);
+}
+
+.graph-placeholder pre {
+	min-height: 260px;
+	margin: var(--space-3) 0 0;
+	padding: var(--space-3);
+	overflow: auto;
+	color: var(--color-text-dark);
+	background: var(--color-main);
+	box-shadow: var(--shadow-offset) 0 var(--color-accent-1);
+}
+
+@media (max-width: 700px) {
+	.menu-button {
+		top: 16px;
+		left: 16px;
+		width: 52px;
+		height: 52px;
+	}
+
+	.wordmark {
+		top: 24px;
+		font-size: 1.5rem;
+	}
+
+	.start-panel {
+		width: calc(100vw - 32px);
+		padding-top: 34vh;
+	}
+
+	h1 {
+		font-size: 2rem;
+	}
+
+	.url-row {
+		grid-template-columns: 1fr 52px;
+		height: 56px;
+	}
+
+	.url-row input {
+		padding: 0 14px;
+		font-size: 0.95rem;
+	}
+
+	.submit-button {
+		width: 32px;
+		height: 32px;
+	}
+
+	.advanced-settings {
+		grid-template-columns: 1fr;
+	}
+}

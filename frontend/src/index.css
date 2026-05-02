@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+
+:root {
+	--color-background: #03181a;
+	--color-main: #a8bbbe;
+	--color-main-muted: #7f9294;
+	--color-text: #eef2f2;
+	--color-text-dark: #102123;
+	--color-accent-1: #247981;
+	--color-shadow: rgba(168, 187, 190, 0.28);
+	--color-error: #f09c8c;
+
+	--space-1: 0.5rem;
+	--space-2: 1rem;
+	--space-3: 1.5rem;
+	--space-4: 2rem;
+	--space-5: 3rem;
+
+	--input-height: 3.75rem;
+	--shadow-offset: 8px 8px;
+
+	font-family: "JetBrains Mono", monospace;
+	color: var(--color-text);
+	background: var(--color-background);
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+	min-height: 100vh;
+	background: var(--color-background);
+}
+
+button,
+input {
+	font: inherit;
+}
+
+button {
+	border: 0;
+	cursor: pointer;
+}
+
+button:disabled {
+	cursor: wait;
+}
