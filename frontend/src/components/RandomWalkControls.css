@@ -1,0 +1,56 @@
+.random-walk-controls {
+	align-self: center;
+	display: grid;
+	gap: var(--space-2);
+}
+
+.random-walk-toggle,
+.start-walk-button {
+	min-height: 48px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 0 14px;
+	color: var(--color-text-dark);
+	background: var(--color-main);
+	box-shadow: 8px 0 var(--color-accent-1);
+	font-size: 0.95rem;
+}
+
+.random-walk-toggle:hover,
+.random-walk-toggle:focus-visible,
+.start-walk-button:hover,
+.start-walk-button:focus-visible {
+	background: var(--color-text);
+	outline: 0;
+}
+
+.random-walk-fields {
+	display: grid;
+	gap: var(--space-2);
+	color: var(--color-main);
+}
+
+.random-walk-fields label {
+	display: grid;
+	gap: 6px;
+	font-size: 0.85rem;
+}
+
+.random-walk-fields input,
+.random-walk-fields select {
+	width: 100%;
+	min-width: 0;
+	height: 42px;
+	border: 0;
+	outline: 0;
+	padding: 0 10px;
+	color: var(--color-text-dark);
+	background: var(--color-main);
+	font: inherit;
+}
+
+.random-walk-fields select {
+	text-overflow: ellipsis;
+}

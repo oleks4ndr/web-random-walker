@@ -3,8 +3,15 @@ import "./GraphView.css";
 import { Background, Controls, MarkerType, MiniMap, ReactFlow } from "@xyflow/react";
 import type { Node } from "@xyflow/react";
 import { useEffect, useMemo, useState } from "react";
-import { getGraph } from "../api";
-import type { GraphNode, GraphResponse } from "../types";
+import { getGraph, getMetrics } from "../api";
+import type {
+	GraphNode,
+	GraphResponse,
+	MetricsResponse,
+	RandomWalkResponse,
+} from "../types";
+import { MetricsPanel } from "./MetricsPanel";
+import { RandomWalkControls } from "./RandomWalkControls";
 
 type GraphViewProps = {
 	scanId: string;
@@ -21,6 +28,9 @@ type SiteNodeData = {
 export function GraphView({ scanId }: GraphViewProps) {
 	const [graph, setGraph] = useState<GraphResponse | null>(null);
 	const [selectedNode, setSelectedNode] = useState<SiteNodeData | null>(null);
+	const [randomWalk, setRandomWalk] = useState<RandomWalkResponse | null>(null);
+	const [metrics, setMetrics] = useState<MetricsResponse | null>(null);
+	const [isLoadingMetrics, setIsLoadingMetrics] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
@@ -34,6 +44,9 @@ export function GraphView({ scanId }: GraphViewProps) {
 				const graphResponse = await getGraph(scanId);
 				if (!ignore) {
 					setGraph(graphResponse);
+					setSelectedNode(null);
+					setRandomWalk(null);
+					setMetrics(null);
 				}
 			} catch (caughtError) {
 				if (!ignore) {
@@ -93,6 +106,20 @@ export function GraphView({ scanId }: GraphViewProps) {
 		type: "smoothstep",
 	};
 
+	async function handleWalkComplete(result: RandomWalkResponse) {
+		setRandomWalk(result);
+		setIsLoadingMetrics(true);
+
+		try {
+			const metricsResponse = await getMetrics(scanId);
+			setMetrics(metricsResponse);
+		} catch {
+			setMetrics(null);
+		} finally {
+			setIsLoadingMetrics(false);
+		}
+	}
+
 	return (
 		<div className="graph-view">
 			<div className="graph-meta">
@@ -102,39 +129,64 @@ export function GraphView({ scanId }: GraphViewProps) {
 				</span>
 			</div>
 
-			<div className="graph-canvas">
-				<ReactFlow
-					nodes={flowData.nodes}
-					edges={flowData.edges}
-					fitView
-					nodesDraggable={false}
-					defaultEdgeOptions={defaultEdgeOptions}
-					selectNodesOnDrag={false}
-					edgesFocusable={false}
-					edgesReconnectable={false}
-					nodesConnectable={false}
-					onNodeClick={(_, node) => setSelectedNode(node.data as SiteNodeData)}>
-					<Background color="rgba(168, 187, 190, 0.18)" gap={28} />
-					<MiniMap nodeColor="var(--color-accent-1)" maskColor="rgba(3, 24, 26, 0.72)" />
-					<Controls />
-				</ReactFlow>
+			<div className="graph-workspace">
+				<aside className="node-details" aria-label="Selected page details">
+					{selectedNode ? (
+						<>
+							<h2>{selectedNode.title || selectedNode.label}</h2>
+							<p>{selectedNode.url}</p>
+							<dl>
+								<div>
+									<dt>Depth</dt>
+									<dd>{selectedNode.depth}</dd>
+								</div>
+								<div>
+									<dt>Status</dt>
+									<dd>{selectedNode.status_code ?? "unknown"}</dd>
+								</div>
+							</dl>
+						</>
+					) : (
+						<p className="node-details-empty">Select a node.</p>
+					)}
+				</aside>
+
+				<div className="graph-canvas">
+					<ReactFlow
+						nodes={flowData.nodes}
+						edges={flowData.edges}
+						fitView
+						nodesDraggable={false}
+						defaultEdgeOptions={defaultEdgeOptions}
+						selectNodesOnDrag={false}
+						edgesFocusable={false}
+						edgesReconnectable={false}
+						nodesConnectable={false}
+						onNodeClick={(_, node) => setSelectedNode(node.data as SiteNodeData)}>
+						<Background color="rgba(168, 187, 190, 0.18)" gap={28} />
+						{/* <MiniMap
+							nodeColor="var(--color-accent-1)"
+							maskColor="rgba(3, 24, 26, 0.72)"
+						/> */}
+						<Controls />
+					</ReactFlow>
+				</div>
+
+				<RandomWalkControls
+					key={scanId}
+					scanId={scanId}
+					rootUrl={graph.root_url}
+					nodes={graph.nodes}
+					onWalkComplete={handleWalkComplete}
+				/>
 			</div>
 
-			{selectedNode && (
-				<aside className="node-details">
-					<h2>{selectedNode.title || selectedNode.label}</h2>
-					<p>{selectedNode.url}</p>
-					<dl>
-						<div>
-							<dt>Depth</dt>
-							<dd>{selectedNode.depth}</dd>
-						</div>
-						<div>
-							<dt>Status</dt>
-							<dd>{selectedNode.status_code ?? "unknown"}</dd>
-						</div>
-					</dl>
-				</aside>
+			{randomWalk && (
+				<MetricsPanel
+					randomWalk={randomWalk}
+					metrics={metrics}
+					isLoadingMetrics={isLoadingMetrics}
+				/>
 			)}
 		</div>
 	);

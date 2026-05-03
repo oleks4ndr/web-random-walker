@@ -1,0 +1,86 @@
+.metrics-panel {
+	display: grid;
+	gap: var(--space-3);
+	margin-top: var(--space-3);
+	padding: var(--space-2);
+	color: var(--color-text-dark);
+	background: var(--color-main);
+	box-shadow: var(--shadow-offset) 0 var(--color-accent-1);
+}
+
+.metrics-summary {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--space-2);
+}
+
+.metric-value {
+	display: grid;
+	gap: 4px;
+	padding: 10px;
+	background: rgba(3, 24, 26, 0.12);
+}
+
+.metric-value span {
+	color: rgba(16, 33, 35, 0.68);
+	font-size: 0.78rem;
+}
+
+.metric-value strong {
+	font-size: 1.2rem;
+}
+
+.metrics-lists {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--space-2);
+}
+
+.metric-list {
+	min-width: 0;
+}
+
+.metric-list h2,
+.general-metrics h2 {
+	margin: 0 0 8px;
+	color: var(--color-text-dark);
+	font-size: 0.95rem;
+	text-shadow: none;
+}
+
+.metric-list p {
+	margin: 0;
+	color: rgba(16, 33, 35, 0.68);
+}
+
+.metric-list ol {
+	display: grid;
+	gap: 6px;
+	margin: 0;
+	padding-left: 1.35rem;
+}
+
+.metric-list li {
+	min-width: 0;
+}
+
+.metric-list li span {
+	overflow-wrap: anywhere;
+}
+
+.metric-list li strong {
+	float: right;
+	margin-left: 8px;
+}
+
+.general-metrics {
+	display: grid;
+	gap: var(--space-2);
+}
+
+@media (max-width: 900px) {
+	.metrics-summary,
+	.metrics-lists {
+		grid-template-columns: 1fr;
+	}
+}

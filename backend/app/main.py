@@ -95,11 +95,22 @@ def get_metrics(scan_id: str):
 @app.post("/scans/{scan_id}/random-walk", response_model=RandomWalkResponse)
 def random_walk(scan_id: str, request: RandomWalkRequest):
     graph = load_file_or_404(scan_id, "graph.json")
+    start_url = request.start_url or graph["root_url"]
+
+    cached_result = load_cached_random_walk(scan_id)
+    if cached_result and random_walk_config_matches(
+        cached_result,
+        request.walk_count,
+        request.steps_per_walk,
+        start_url,
+    ):
+        return cached_result
+
     result = run_random_walks(
         graph,
         walk_count=request.walk_count,
         steps_per_walk=request.steps_per_walk,
-        start_url=request.start_url,
+        start_url=start_url,
     )
     result["scan_id"] = scan_id
 
@@ -110,6 +121,26 @@ def random_walk(scan_id: str, request: RandomWalkRequest):
     save_scan_file(scan_id, "metrics.json", metrics)
 
     return result
+
+
+def load_cached_random_walk(scan_id: str) -> dict | None:
+    try:
+        return load_scan_file(scan_id, "random_walk.json")
+    except FileNotFoundError:
+        return None
+
+
+def random_walk_config_matches(
+    result: dict,
+    walk_count: int,
+    steps_per_walk: int,
+    start_url: str,
+) -> bool:
+    return (
+        result.get("walk_count") == walk_count
+        and result.get("steps_per_walk") == steps_per_walk
+        and result.get("start_url") == start_url
+    )
 
 
 def load_file_or_404(scan_id: str, filename: str) -> dict:
