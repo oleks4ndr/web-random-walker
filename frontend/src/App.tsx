@@ -57,10 +57,13 @@ function StartPage() {
 
 function GraphPage() {
 	const { scanId } = useParams();
+	const navigate = useNavigate();
 
 	return (
 		<main className="graph-page">
-			<div className="wordmark">WRW</div>
+			<div className="wordmark" onClick={() => navigate("/")}>
+				WRW
+			</div>
 			<section className="graph-panel" aria-labelledby="graph-title">
 				<h1 id="graph-title">Graph</h1>
 				<p className="scan-id">scan_id: {scanId}</p>
