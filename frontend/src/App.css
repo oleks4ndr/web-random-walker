@@ -1,5 +1,5 @@
 .start-page,
-.graph-placeholder-page {
+.graph-page {
 	position: relative;
 	min-height: 100vh;
 	background: var(--color-background);
@@ -175,24 +175,19 @@ h1 {
 	font-size: 1.1rem;
 }
 
-.graph-placeholder {
-	width: min(920px, calc(100vw - 48px));
+.graph-panel {
+	width: min(1200px, calc(100vw - 48px));
 	margin: 0 auto;
-	padding-top: 20vh;
+	padding-top: 12vh;
 }
 
-.graph-placeholder p {
+.scan-id {
 	color: var(--color-main);
 }
 
-.graph-placeholder pre {
-	min-height: 260px;
-	margin: var(--space-3) 0 0;
-	padding: var(--space-3);
-	overflow: auto;
-	color: var(--color-text-dark);
-	background: var(--color-main);
-	box-shadow: var(--shadow-offset) 0 var(--color-accent-1);
+.scan-id {
+	margin: 0 0 var(--space-3);
+	opacity: 0.72;
 }
 
 @media (max-width: 700px) {
@@ -235,4 +230,10 @@ h1 {
 	.advanced-settings {
 		grid-template-columns: 1fr;
 	}
+
+	.graph-panel {
+		width: calc(100vw - 32px);
+		padding-top: 14vh;
+	}
+
 }
