@@ -1,0 +1,145 @@
+.menu-button {
+	position: fixed;
+	top: 22px;
+	left: 24px;
+	z-index: 20;
+	width: 58px;
+	height: 58px;
+	display: grid;
+	align-content: center;
+	gap: 8px;
+	padding: 13px 12px;
+	background: var(--color-main);
+	box-shadow: var(--shadow-offset) 0 var(--color-accent-1);
+}
+
+.menu-button span {
+	display: block;
+	width: 34px;
+	height: 4px;
+	background: var(--color-text-dark);
+	opacity: 0.62;
+}
+
+.scan-menu {
+	position: fixed;
+	inset: 22px auto 74px 24px;
+	z-index: 30;
+	width: 358px;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	gap: var(--space-3);
+	padding: 14px 12px 22px;
+	background: var(--color-main);
+	box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-accent-1);
+}
+
+.scan-menu-header {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	color: var(--color-text-dark);
+}
+
+.scan-menu-close {
+	width: 44px;
+	height: 44px;
+	color: rgba(16, 33, 35, 0.68);
+	background: transparent;
+	font-size: 2.7rem;
+	line-height: 1;
+}
+
+.scan-menu-close:hover,
+.scan-menu-close:focus-visible {
+	color: var(--color-text-dark);
+	outline: 0;
+}
+
+.scan-menu h2 {
+	margin: 0;
+	color: var(--color-text-dark);
+	font-size: 1.45rem;
+	font-weight: 500;
+	text-shadow: none;
+}
+
+.scan-menu-list {
+	display: grid;
+	align-content: start;
+	gap: var(--space-3);
+	overflow-y: auto;
+	padding: 2px 10px 8px 0;
+}
+
+.scan-card,
+.new-exploration-button {
+	width: 100%;
+	min-height: 76px;
+	display: grid;
+	align-content: center;
+	gap: 6px;
+	padding: 12px 16px;
+	color: rgba(16, 33, 35, 0.58);
+	background: rgba(238, 242, 242, 0.42);
+	box-shadow: 10px 10px 0 rgba(16, 33, 35, 0.22);
+	text-align: left;
+}
+
+.scan-card:hover,
+.scan-card:focus-visible,
+.new-exploration-button:hover,
+.new-exploration-button:focus-visible {
+	background: var(--color-text);
+	outline: 0;
+}
+
+.scan-card-url {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: rgba(16, 33, 35, 0.7);
+	font-size: 1rem;
+}
+
+.scan-card-meta {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: rgba(16, 33, 35, 0.42);
+	font-size: 0.72rem;
+}
+
+.scan-menu-message,
+.scan-menu-error {
+	margin: 0;
+	padding: var(--space-2);
+	color: rgba(16, 33, 35, 0.62);
+}
+
+.scan-menu-error {
+	color: #7c2f25;
+}
+
+.new-exploration-button {
+	min-height: 62px;
+	justify-content: center;
+	color: rgba(16, 33, 35, 0.5);
+	background: rgba(245, 244, 219, 0.58);
+	font-size: 1rem;
+	text-align: center;
+}
+
+@media (max-width: 700px) {
+	.menu-button {
+		top: 16px;
+		left: 16px;
+		width: 52px;
+		height: 52px;
+	}
+
+	.scan-menu {
+		inset: 14px 14px 54px;
+		width: auto;
+	}
+}

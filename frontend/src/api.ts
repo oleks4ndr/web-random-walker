@@ -5,6 +5,7 @@ import type {
 	MetricsResponse,
 	RandomWalkRequest,
 	RandomWalkResponse,
+	ScanSummary,
 } from "./types";
 
 const API_BASE_URL = "http://127.0.0.1:8000";
@@ -32,6 +33,17 @@ export async function getGraph(scanId: string): Promise<GraphResponse> {
 	if (!response.ok) {
 		const message = await response.text();
 		throw new Error(message || "Failed to load graph");
+	}
+
+	return response.json();
+}
+
+export async function getScans(): Promise<ScanSummary[]> {
+	const response = await fetch(`${API_BASE_URL}/scans`);
+
+	if (!response.ok) {
+		const message = await response.text();
+		throw new Error(message || "Failed to load scans");
 	}
 
 	return response.json();

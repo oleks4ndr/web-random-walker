@@ -6,28 +6,6 @@
 	overflow: hidden;
 }
 
-.menu-button {
-	position: fixed;
-	top: 22px;
-	left: 24px;
-	width: 58px;
-	height: 58px;
-	display: grid;
-	align-content: center;
-	gap: 8px;
-	padding: 13px 12px;
-	background: var(--color-main);
-	box-shadow: var(--shadow-offset) 0 var(--color-accent-1);
-}
-
-.menu-button span {
-	display: block;
-	width: 34px;
-	height: 4px;
-	background: var(--color-text-dark);
-	opacity: 0.62;
-}
-
 .wordmark {
 	position: fixed;
 	top: 25px;
@@ -191,13 +169,6 @@ h1 {
 }
 
 @media (max-width: 700px) {
-	.menu-button {
-		top: 16px;
-		left: 16px;
-		width: 52px;
-		height: 52px;
-	}
-
 	.wordmark {
 		top: 24px;
 		font-size: 1.5rem;

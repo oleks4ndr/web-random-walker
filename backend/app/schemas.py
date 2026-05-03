@@ -23,6 +23,14 @@ class CrawlResponse(BaseModel):
     links_found: int
 
 
+class ScanSummary(BaseModel):
+    scan_id: str
+    root_url: str
+    created_at: str
+    pages_crawled: int
+    links_found: int
+
+
 class RandomWalkRequest(BaseModel):
     walk_count: int = Field(DEFAULT_RANDOM_WALK_COUNT, ge=1, le=100_000)
     steps_per_walk: int = Field(DEFAULT_RANDOM_WALK_STEPS, ge=1, le=10_000)

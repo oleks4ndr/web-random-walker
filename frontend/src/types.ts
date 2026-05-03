@@ -11,6 +11,14 @@ export type CrawlResponse = {
 	links_found: number;
 };
 
+export type ScanSummary = {
+	scan_id: string;
+	root_url: string;
+	created_at: string;
+	pages_crawled: number;
+	links_found: number;
+};
+
 export type GraphNode = {
 	id: string;
 	url: string;

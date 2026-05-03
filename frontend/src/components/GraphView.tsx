@@ -1,6 +1,6 @@
 import "@xyflow/react/dist/style.css";
 import "./GraphView.css";
-import { Background, Controls, MarkerType, MiniMap, ReactFlow } from "@xyflow/react";
+import { Background, Controls, MarkerType, ReactFlow } from "@xyflow/react";
 import type { Node } from "@xyflow/react";
 import { useEffect, useMemo, useState } from "react";
 import { getGraph, getMetrics } from "../api";

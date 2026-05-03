@@ -3,12 +3,14 @@ import { BrowserRouter, Route, Routes, useNavigate, useParams } from "react-rout
 import "./App.css";
 import { startCrawl } from "./api";
 import { GraphView } from "./components/GraphView";
+import { ScanMenu } from "./components/ScanMenu";
 import { UrlForm } from "./components/UrlForm";
 import type { CrawlRequest } from "./types";
 
 function App() {
 	return (
 		<BrowserRouter>
+			<ScanMenu />
 			<Routes>
 				<Route path="/" element={<StartPage />} />
 				<Route path="/graph/:scanId" element={<GraphPage />} />
@@ -40,12 +42,6 @@ function StartPage() {
 
 	return (
 		<main className="start-page">
-			<button className="menu-button" type="button" aria-label="Open scan history">
-				<span />
-				<span />
-				<span />
-			</button>
-
 			<div className="wordmark">WRW</div>
 
 			<section className="start-panel" aria-labelledby="page-title">

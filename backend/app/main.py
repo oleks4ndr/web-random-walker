@@ -11,9 +11,11 @@ from .schemas import (
     MetricsResponse,
     RandomWalkRequest,
     RandomWalkResponse,
+    ScanSummary,
 )
 from .storage import (
     create_scan_id,
+    list_scan_summaries,
     load_scan_file,
     new_metadata,
     save_scan,
@@ -80,6 +82,11 @@ def crawl(request: CrawlRequest):
         "pages_crawled": len(graph["nodes"]),
         "links_found": len(graph["edges"]),
     }
+
+
+@app.get("/scans", response_model=list[ScanSummary])
+def get_scans():
+    return list_scan_summaries()
 
 
 @app.get("/scans/{scan_id}/graph", response_model=GraphResponse)

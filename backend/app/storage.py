@@ -41,6 +41,35 @@ def load_scan_file(scan_id: str, filename: str) -> dict:
         return json.load(file)
 
 
+def list_scan_summaries() -> list[dict]:
+    if not SCANS_DIR.exists():
+        return []
+
+    scans = []
+    for scan_dir in SCANS_DIR.iterdir():
+        if not scan_dir.is_dir():
+            continue
+
+        metadata_path = scan_dir / "metadata.json"
+        if not metadata_path.exists():
+            continue
+
+        with metadata_path.open("r", encoding="utf-8") as file:
+            metadata = json.load(file)
+
+        scans.append(
+            {
+                "scan_id": metadata.get("scan_id", scan_dir.name),
+                "root_url": metadata.get("root_url", ""),
+                "created_at": metadata.get("created_at", ""),
+                "pages_crawled": metadata.get("pages_crawled", 0),
+                "links_found": metadata.get("links_found", 0),
+            }
+        )
+
+    return sorted(scans, key=lambda scan: scan["created_at"], reverse=True)
+
+
 def scan_exists(scan_id: str) -> bool:
     return (SCANS_DIR / scan_id).exists()
 
